@@ -25,3 +25,36 @@ This project demonstrates how to build a CRUD app with REST API, EJS templates, 
 ---
 
 ## 📂 Project Structure
+```bash
+express-todo/
+├─ app.js          # Main server
+├─ package.json    # Dependencies & scripts
+├─ data/
+│  └─ tasks.json   # File-based storage
+├─ public/
+│  └─ style.css    # Styles
+└─ views/
+   ├─ layout.ejs   # Layout template
+   └─ index.ejs    # Main page
+```
+
+---
+
+## ⚡ Installation & Usage
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<your-username>/express-todo.git
+   cd express-todo
+2. Install dependencies:
+   ```bash
+   npm install
+3. Run the server:
+   ```bash
+   npm run dev
+4. Open your browser at:
+   http://localhost:3000
+
+---
+
+## 👨‍💻 Author
+Developed by Eliran Melihov
