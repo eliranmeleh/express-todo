@@ -1,0 +1,57 @@
+<header>
+  <h1>My To-Dos</h1>
+  <span class="badge"><%= tasks.filter(t => !t.done).length %> open</span>
+</header>
+
+<form class="add" id="add-form">
+  <input type="text" id="title" placeholder="Add a new task..." />
+  <button type="submit">Add</button>
+</form>
+
+<ul id="list">
+  <% tasks.forEach(t => { %>
+    <li class="<%= t.done ? 'done' : '' %>" data-id="<%= t.id %>">
+      <span class="title"><%= t.title %></span>
+      <div class="actions">
+        <button class="toggle">✔</button>
+        <button class="delete">🗑</button>
+      </div>
+      <span class="badge"><%= new Date(t.createdAt).toLocaleDateString() %></span>
+    </li>
+  <% }) %>
+</ul>
+
+<div class="footer">Built with Express + EJS + JSON store</div>
+
+<script>
+const form = document.getElementById('add-form');
+const titleInput = document.getElementById('title');
+const list = document.getElementById('list');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const title = titleInput.value.trim();
+  if (!title) return;
+  const res = await fetch('/api/tasks', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title }) });
+  if (!res.ok) return alert('Failed to add task');
+  location.reload();
+});
+
+list.addEventListener('click', async (e) => {
+  const li = e.target.closest('li');
+  if (!li) return;
+  const id = li.dataset.id;
+
+  if (e.target.classList.contains('toggle')) {
+    const res = await fetch(`/api/tasks/${id}/toggle`, { method: 'PATCH' });
+    if (!res.ok) return alert('Toggle failed');
+    location.reload();
+  }
+
+  if (e.target.classList.contains('delete')) {
+    const res = await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
+    if (res.status !== 204) return alert('Delete failed');
+    location.reload();
+  }
+});
+</script>
