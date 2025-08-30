@@ -43,7 +43,7 @@ express-todo/
 ## ⚡ Installation & Usage
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/express-todo.git
+   git clone https://github.com/eliranmeleh/express-todo.git
    cd express-todo
 2. Install dependencies:
    ```bash
